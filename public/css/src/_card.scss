@@ -1,0 +1,162 @@
+.upperPart {
+    height: 48px;
+}
+.id, .name {
+    padding-top: 22px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.id {
+    color: rgb(255, 26, 140);
+    float:left;
+}
+.name {
+    float: right;
+}
+img {
+    width: 317px;
+    height: 317px;
+    display: block;
+    margin-left: 1px;
+    margin-right: 1px;
+    margin-bottom: 5px;
+    object-fit: contain;
+    background-color: #bbb;
+}
+
+table {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.prop {
+    text-align: left;
+}
+.val {
+    text-align: right;
+    color: rgb(255, 26, 140);
+    transition: all 0.3s;
+    &.active {
+      color: #fff;
+      background: rgb(255, 26, 140);
+      font-weight: bold;
+      &.correct {
+        background: green;
+      }
+      &.tie {
+        background: darkslategray;
+      }
+      &.wrong {
+        background: firebrick
+      }
+    }
+    &:hover {
+      font-weight: bold;
+      cursor: pointer;
+    }
+    &.disabled {
+      pointer-events: none;
+    }
+}
+
+#cardA {
+    position: absolute;
+    left: 0;
+    margin-left: 100px;
+}
+
+#cardB {
+    position: absolute;
+    right: 0;
+    margin-right: 100px;
+}
+
+.card-container {
+  perspective:1200;
+  width: 347px;
+  height: 520px;
+  margin-top: 32px;
+
+  & .card {
+    height: 100%;
+    width: 100%;
+    font-family: 'Arial', sans-serif;
+    transform-style:preserve-3d;
+    transition:all .4s ease-in;
+
+    transition: all 0.2s ease-out;
+
+    transform:rotateY(179.9deg);
+  }  
+  & .card-front, & .card-back{
+    height:100%;
+    width:100%;
+    position:absolute;
+    backface-visibility: hidden;
+    transform-style:preserve-3d;
+  }
+  & .card-front {
+    background-color: rgb(247, 247, 246);
+    border-radius: 33px;
+    border: 1px solid #333;
+    & .inner {
+      padding: 0 13px;
+    }
+  }
+  & .card-back {
+    background: url('../images/piatnik.jpg');
+    background-size: 347px auto;
+    border-radius: 33px;
+    position: relative;
+    border: 1px solid #444;
+    transform:rotateY(179.9deg);
+  }
+  &.active .card {
+    transform:rotateY(0deg);
+    outline: none;
+  }
+}
+
+
+#cardADeep, #cardBDeep {
+  position: absolute;
+  width: 350px;
+  height: 522px;
+  left: 100px;
+  margin-top: 32px;
+  z-index: 0;
+
+  & .inner {
+    width: 350px;
+    height: 522px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 1px solid #777;
+    border-radius: 39px;
+    background: url('../images/piatnik.jpg');
+    background-size: 347px auto;
+    &:nth-of-type(2n) {
+      border-color: #444;
+    }
+  }
+}
+#cardBDeep {
+    left: 577px;
+}
+
+@media screen and (max-width: 900px ) {
+    #cardADeep, #cardA, #cardBackA {
+        left: 100px;
+        margin-left: 0;
+        margin-top: 16px;
+        top: 0;
+    }
+    #cardBDeep, #cardB, #cardBackB {
+        // position: relative;
+        left: 100px;
+        margin-left: 0;
+        margin-top: 40px;
+        top: 600px;
+    }
+}

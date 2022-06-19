@@ -1,0 +1,56 @@
+.end-game {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	transform: translateY(-100%);
+	transition: transform 0.4s ease-in;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	&.active {
+		transform: translateY(0);
+	}
+	&.end-game__correct {
+		background: rgba(60,179,113, 0.75);
+
+		& .inner {
+			background: url('../images/gratulation.png');
+			width: 600px;
+			height: 141px;
+			background-repeat: no-repeat;
+			& .numOfUserActions {
+				margin-top: 160px;
+				text-align: center;
+				color: #eee;
+				text-shadow: 1px 1px #000;
+				font-size: 32px;
+			}
+		}
+		&.active .inner {
+			animation: scale-up-an 1.5s 1;
+		}
+	}
+	&.end-game__wrong {
+		background: rgba(178,34,34,0.8);
+		font-size: 60px;
+		& .inner .numOfUserActions {
+			font-size: 32px;
+			text-align: center;
+			color: #eee;
+			text-shadow: 1px 1px #000;
+		}
+	}
+}
+
+@keyframes scale-up-an {
+	50%, 87.5% {
+		transform: scale(1)
+	}
+	75% {
+		transform: scale(1.3)
+	} to {
+		transform: scale(1)
+	}
+}

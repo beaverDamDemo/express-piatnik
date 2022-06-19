@@ -1,0 +1,131 @@
+@font-face {
+    font-family: 'tannenberg_fettregular';
+    src: url('../fonts/tannenbergfett-webfont.woff2') format('woff2'),
+     url('../fonts/tannenbergfett-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+html, body {
+	font-family: 'tannenberg_fettregular', 'Open Sans', sans-serif;
+	width: 100%;
+	height: 100%;
+    margin: 0;
+    padding: 0;
+    background: url('../images/background-dark.jpg');
+}
+
+#wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1024px;
+}
+header {
+    height: 40px;
+    background: url('../images/background-dark.jpg');
+    color: #fff;
+    line-height: 40px;
+}
+header form {
+    text-align: center;
+}
+header form output{
+    font-size: 20px;
+}
+
+#content {
+    background-image:  url('../images/background-wood-gray.jpg');
+    height: 640px;
+    position: relative;
+    border-radius: 12px;
+}
+
+#statusText {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 60px;
+    width: 320px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 7px 3px rebeccapurple;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 20px 30px;
+    transform: scaleY(0);
+    transition: all 0.166s;
+    transform-origin: center bottom;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.wrong {
+        background-color: darksalmon;
+    }
+    &.correct {
+        background: lightgreen;
+    }
+    &.active {
+        transform: scaleY(1);
+        transition: transform 0.15s;
+    }
+}
+.coin {
+    background-size: contain;
+    position: absolute;
+    height: 180px;
+    width: 180px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    animation: scalex_an 0.5s ease-in-out infinite;
+    @keyframes scalex_an {
+        from, to {
+            transform: scaleX(1)
+        }
+        50% {
+            transform: scaleX(-1);
+        }
+    }
+}
+footer {
+    height: 60px;
+    background: url('../images/background-dark.jpg');
+    color: #fff;
+}
+#standings {
+    display: flex;
+    justify-content: space-evenly;
+    height: 32px;
+    line-height: 32px;
+    font-size: 18px;
+    & label {
+
+    }
+}
+details {
+
+   &#cara {
+
+   }
+   &#carb {
+
+   } 
+}
+#info {
+    float: left;
+    font-size: x-small;
+}
+
+@media screen and (max-width: 900px ) {
+    #wrapper {
+        width: 600px;
+    }
+    #content {
+        height: 1200px;
+    }
+}
