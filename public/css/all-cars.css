@@ -1,164 +1,111 @@
 main {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	width: 100%;
-	background-image: url("../images/background.jpg");
-	justify-content: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  background-image: url("../images/background.jpg");
+  justify-content: center;
 }
+
 article {
-	width: 347px;
-	height: 520px;
-	position: relative;
-	margin: 2px;
+  width: 347px;
+  height: 520px;
+  position: relative;
+  margin: 2px;
+}
+
+.card-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  perspective: 1200;
+  width: 347px;
+  height: 520px;
+  margin-top: 32px;
+}
+
+.card-container .card {
+  height: 100%;
+  width: 100%;
+  font-family: 'Arial', sans-serif;
+  transform-style: preserve-3d;
+  transition: all 0.5s ease-out;
+  transform: rotateY(179.9deg);
+}
+
+.card-container .card-front, .card-container .card-back {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.card-container .card-front {
+  background-color: #f7f7f6;
+  border-radius: 33px;
+  border: 1px solid #333;
+}
+
+.card-container .card-front .inner {
+  padding: 0 13px;
+}
+
+.card-container .card-back {
+  background: url('../images/piatnik.jpg');
+  background-size: 347px auto;
+  border-radius: 33px;
+  position: relative;
+  border: 1px solid #444;
+  transform: rotateY(179.9deg);
+}
+
+.card-container.active .card {
+  transform: rotateY(0deg);
+  outline: none;
 }
 
 .upperPart {
-	 height: 48px;
+  height: 48px;
 }
- .id, .name {
-	 padding-top: 22px;
-	 font-weight: bold;
-	 text-transform: capitalize;
+
+.id, .name {
+  padding-top: 22px;
+  font-weight: bold;
+  text-transform: capitalize;
 }
- .id {
-	 color: #ff1a8c;
-	 float: left;
+
+.id {
+  color: #ff1a8c;
+  float: left;
 }
- .name {
-	 float: right;
+
+.name {
+  float: right;
 }
- img {
-	 width: 317px;
-	 height: 317px;
-	 display: block;
-	 margin-left: 1px;
-	 margin-right: 1px;
-	 margin-bottom: 5px;
-	 object-fit: contain;
-	 background-color: #bbb;
+
+img {
+  width: 317px;
+  height: 317px;
+  display: block;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-bottom: 5px;
+  object-fit: contain;
+  background-color: #bbb;
 }
- table {
-	 width: 100%;
-	 margin-top: 10px;
+
+table {
+  width: 100%;
+  margin-top: 10px;
 }
- .prop {
-	 text-align: left;
+
+.prop {
+  text-align: left;
 }
- .val {
-	 text-align: right;
-	 color: #ff1a8c;
-	 transition: all 0.3s;
-}
- .val.active {
-	 color: #fff;
-	 background: #ff1a8c;
-	 font-weight: bold;
-}
- .val.active.correct {
-	 background: green;
-}
- .val.active.tie {
-	 background: darkslategray;
-}
- .val.active.wrong {
-	 background: firebrick;
-}
- .val:hover {
-	 font-weight: bold;
-	 cursor: pointer;
-}
- .val.disabled {
-	 pointer-events: none;
-}
- #cardA {
-	 position: absolute;
-	 left: 50%;
-   transform: translateX(-50%);
-}
- #cardB {
-	 position: absolute;
-	 right: 0;
-	 margin-right: 100px;
-}
- .card-container {
-	 perspective: 1200;
-	 width: 347px;
-	 height: 520px;
-	 margin-top: 32px;
-}
- .card-container .card {
-	 height: 100%;
-	 width: 100%;
-	 font-family: 'Arial', sans-serif;
-	 transform-style: preserve-3d;
-	 transition: all 0.4s ease-in;
-	 transition: all 0.2s ease-out;
-	 transform: rotateY(179.9deg);
-}
- .card-container .card-front, .card-container .card-back {
-	 height: 100%;
-	 width: 100%;
-	 position: absolute;
-	 backface-visibility: hidden;
-	 transform-style: preserve-3d;
-}
- .card-container .card-front {
-	 background-color: #f7f7f6;
-	 border-radius: 33px;
-	 border: 1px solid #333;
-}
- .card-container .card-front .inner {
-	 padding: 0 13px;
-}
- .card-container .card-back {
-	 background: url('../images/piatnik.jpg');
-	 background-size: 347px auto;
-	 border-radius: 33px;
-	 position: relative;
-	 border: 1px solid #444;
-	 transform: rotateY(179.9deg);
-}
- .card-container.active .card {
-	 transform: rotateY(0deg);
-	 outline: none;
-}
- #cardADeep, #cardBDeep {
-	 position: absolute;
-	 width: 350px;
-	 height: 522px;
-	 left: 100px;
-	 margin-top: 32px;
-	 z-index: 0;
-}
- #cardADeep .inner, #cardBDeep .inner {
-	 width: 350px;
-	 height: 522px;
-	 position: absolute;
-	 left: 0;
-	 top: 0;
-	 border: 1px solid #777;
-	 border-radius: 39px;
-	 background: url('../images/piatnik.jpg');
-	 background-size: 347px auto;
-}
- #cardADeep .inner:nth-of-type(2n), #cardBDeep .inner:nth-of-type(2n) {
-	 border-color: #444;
-}
- #cardBDeep {
-	 left: 577px;
-}
- @media screen and (max-width: 900px) {
-	 #cardADeep, #cardA, #cardBackA {
-		 left: 100px;
-		 margin-left: 0;
-		 margin-top: 16px;
-		 top: 0;
-	}
-	 #cardBDeep, #cardB, #cardBackB {
-		 left: 100px;
-		 margin-left: 0;
-		 margin-top: 40px;
-		 top: 600px;
-	}
+
+.val {
+  text-align: right;
+  color: #ff1a8c;
+  transition: all 0.3s;
 }
