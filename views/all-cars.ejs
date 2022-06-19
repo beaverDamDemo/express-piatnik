@@ -11,10 +11,11 @@
 </head>
 
 <body>
+  <main>
+    <% for(let i=0; i<carsData.length; i++) {%>
+    <article class="">
 
-  <% for(let i=0; i<carsData.length; i++) {%>
-  <ul>
-    <li>
+
       <div id='cardA' class='card-container'>
         <div class="card">
           <div class="card-front">
@@ -47,16 +48,15 @@
           <div class="card-back"></div>
         </div>
       </div>
-    </li>
-  </ul>
-  <% } %>
-
+    </article>
+    <% } %>
+  </main>
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   <!-- <script src="index.js"></script> -->
   <script type="text/javascript">
     for (let l = 0; l < 36; l++) {
       setTimeout(function() {
-        $('ul:nth-child(' + (l) + ') .card-container').addClass('active')
+        $('main:nth-child(' + (l) + ') .card-container').addClass('active')
       }, (500 + l * 50))
     }
   </script>

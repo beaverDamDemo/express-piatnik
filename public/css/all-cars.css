@@ -1,8 +1,16 @@
-ul {
+main {
 	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+	background-image: url("../images/background.jpg");
+	justify-content: center;
 }
-li {
-
+article {
+	width: 347px;
+	height: 520px;
+	position: relative;
+	margin: 2px;
 }
 
 .upperPart {
