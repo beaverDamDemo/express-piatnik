@@ -3,9 +3,22 @@ const router = express.Router()
 const carInfo = require("../public/car-info.json")
 
 
-router.route("/").get((req, res) => {
-  res.render("all-cars", { carsData: (carInfo.cars)})
-})
+router.route("/")
+  .get((req, res) => {
+    res.render("all-cars", {
+      carsData: (carInfo.cars)
+    })
+  })
+  .post((req, res) => {
+    // req.params
+    // req.body
+    // we need first to parse json from body, but it is already done as we enabled json() in server.js 
+    res.send({
+      "req.params": req.params,
+      "req.body": req.body,
+      "carInfo": carInfo
+    })
+  })
 
 router.route("/:id")
   .get((req, res) => {
@@ -15,9 +28,6 @@ router.route("/:id")
       id: req.params.id,
       carData: Object.entries(carInfo.cars[req.params.id])
     })
-  })
-  .post((req, res) => {
-    res.send("post")
   })
   .put((req, res) => {
     res.send("put")
