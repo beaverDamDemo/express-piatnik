@@ -1,5 +1,7 @@
 const express = require("express")
 const app = express()
+const port = 3000
+
 app.use(express.static("public"))
 app.use(express.urlencoded({
   extended: true
@@ -22,6 +24,6 @@ app.use("/cars", carsRouter)
 
 
 
+app.listen(process.env.PORT || port, () => console.log(`Program listening at http://localhost:${port}`))
 
-
-app.listen(3000)
+// app.listen(3000)
