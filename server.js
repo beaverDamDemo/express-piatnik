@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const port = 3000
+const cors = require('cors')
 
 app.use(express.static("public"))
 app.use(express.urlencoded({
@@ -8,10 +9,12 @@ app.use(express.urlencoded({
 }))
 app.use(express.json())
 app.use(express.static(__dirname + "/public"))
-app.set("view engine", "ejs")
-
-
 app.use('images/favicon.jpg', express.static('images/favicon.jpg'));
+app.use(cors({
+  origin: "*"
+}))
+
+app.set("view engine", "ejs")
 
 app.get("/", (req, res) => {
   res.render("home")
