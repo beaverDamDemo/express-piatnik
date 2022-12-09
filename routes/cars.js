@@ -1,7 +1,13 @@
 const express = require("express")
 const router = express.Router()
 const carInfo = require("../public/car-info.json")
+const path = require('path');
 
+router.route("/")
+  .get((req, res) => {
+    res.set('Content-Type', 'text/html')
+    res.send(Buffer.from('<h2>there\'s nothing on this route, try cars/display-all-cars for example</h2><a href="cars/display-all-cars">All</a>'));
+  })
 
 router.route("/display-all-cars")
   .get((req, res) => {
@@ -48,6 +54,12 @@ router.route("/get-single-car/:id")
     res.send({
       carData: Object.entries(carInfo.cars[req.params.id])
     })
+  })
+
+router.route("/get-single-car-image/:id")
+  .get((req, res) => {
+    // console.log(carInfo.cars[req.params.id]["image_url"])
+    res.sendFile(path.join(__dirname, "../public/images/cars/toyota_celica.jpeg"))
   })
 
 module.exports = router
