@@ -66,19 +66,46 @@ router.route("display-single-car/:id")
     res.send("delete")
   })
 
+  router.route("/statistics/resetSingleCar")
+    .put((req, res) => {
+      client.connect(function(err, db) {
+        if (err || !db) {
+          return err
+        }
+
+        let _won, _draw, _lost
+        const entries = db.db("piatnik_cars").collection("statistics").find({
+          carName: req.body.carName
+        }).toArray(function(err, result) {
+          if (err) {
+            res.status(400).send("Error fetching listings!");
+          } else {
+            db.db("piatnik_cars").collection("statistics").findOneAndUpdate({
+              carName: req.body.carName
+            }, {
+              $set: {
+                statistics: {
+                  won: 0,
+                  draw: 0,
+                  lost: 0
+                },
+              }
+            }, {
+              upsert: true,
+              returnNewDocument: true
+            })
+          }
+        })
+      });
+      res.json({
+        message: "resetting statistics"
+      })
+    })
+
 router.route("/statistics")
   .get((req, res) => {
     res.send("get statistics")
   })
-
-
-
-
-
-
-
-
-
   .post((req, res) => {
     client.connect(function(err, db) {
       if (err || !db) {
@@ -93,14 +120,6 @@ router.route("/statistics")
       message: "post statistics"
     })
   })
-
-
-
-
-
-
-
-
 
   .put((req, res) => {
     client.connect(function(err, db) {
