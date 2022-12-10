@@ -3,6 +3,43 @@ const app = express()
 const port = 3000
 const cors = require('cors')
 
+const mongoose = require('mongoose')
+const {
+  MongoClient,
+  ServerApiVersion
+} = require('mongodb');
+const connectionString = "mongodb+srv://dbUser:secret747400@cluster0.mqvqgm4.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(connectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+client.connect(function(err, db) {
+  if (err || !db) {
+    return err
+  }
+
+  db.db("bezkoder_db").collection("store")
+    .find({}).limit(50)
+    .toArray(function(err, result) {
+      if (err) {
+        res.status(400).send("Error fetching listings!");
+      } else {
+        console.log(" resulting", typeof(result))
+        for (let i = 0; i < result.length; i++) {
+          console.log(" inner resulting", result[i])
+        }
+        result.json(result);
+      }
+    });
+  console.log("Successfully connected to MongoDB.");
+});
+
+
+
+
+
+
 app.use(express.static("public"))
 app.use(express.urlencoded({
   extended: true

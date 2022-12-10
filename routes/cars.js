@@ -3,12 +3,27 @@ const router = express.Router()
 const carInfo = require("../public/car-info.json")
 const path = require('path');
 
-router.route("/")
-  .get((req, res) => {
-    res.set('Content-Type', 'text/html')
-    res.send(Buffer.from('<h2>there\'s nothing on this route, try cars/display-all-cars for example</h2><a href="cars/display-all-cars">All</a>'));
-  })
+// router.route("/")
+//   .get((req, res) => {
+//     res.set('Content-Type', 'text/html')
+//     res.send(Buffer.from('<h2>there\'s nothing on this route, try cars/display-all-cars for example</h2><a href="cars/display-all-cars">All</a>'));
+//   })
 
+router.route("/").get((req, res) => {
+  res.render("all-cars", {
+    carsData: (carInfo.cars)
+  })
+})
+
+router.post("/about", function (req, res) {
+  res.send("About this wiki");
+});
+
+// app.get(/:id, (req, res) => {
+//     const id = req.params.id;
+// });
+
+router.route("/:id")
 router.route("/display-all-cars")
   .get((req, res) => {
     res.render("all-cars", {
@@ -42,6 +57,21 @@ router.route("display-single-car/:id")
     res.send("delete")
   })
 
+router.route("/statistics")
+  .get((req, res) => {
+    res.send("get statistics")
+  })
+  .post((req, res) => {
+    db.db("piatnik_cars").collection("statistics").insert({
+      "sample": "foo"
+    })
+    res.send("post statistics")
+  })
+  .put((req, res) => {
+    res.send("put statistics")
+  })
+  .delete((req, res) => {
+    res.send("delete statistics")
 router.route("/get-all-cars")
   .get((req, res) => {
     res.send({
