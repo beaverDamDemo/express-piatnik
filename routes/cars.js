@@ -148,8 +148,24 @@ router.route("/statistics")
     res.send("delete statistics")
   })
 
-router.get("/statistics/:id", (req, res) => {
-  res.send(`Here we showing statistics for particular id : ${req.params.id}`)
+router.get("/statistics/:carName", (req, res) => {
+  client.connect(function(err, db) {
+    if (err || !db) {
+      return err
+    }
+    db.db("piatnik_cars").collection("statistics").find({
+      carName: req.params.carName,
+    }).toArray(function (err, result) {
+      if (err) {
+        res.status(400).send("Error fetching listings!");
+     } else {
+        res.json({
+          message: `Here we showing statistics for particular name : ${req.params.carName}`,
+          value: result
+        });
+      }
+    });
+  })
 })
 
 router.route("/get-all-cars")
