@@ -29,7 +29,7 @@ client.connect(function(err, db) {
         for (let i = 0; i < result.length; i++) {
           console.log(" inner resulting", result[i])
         }
-        result.json(result);
+        // result.json(result);
       }
     });
   console.log("Successfully connected to MongoDB.");

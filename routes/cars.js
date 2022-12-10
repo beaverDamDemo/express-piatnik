@@ -15,7 +15,7 @@ router.route("/").get((req, res) => {
   })
 })
 
-router.post("/about", function (req, res) {
+router.post("/about", function(req, res) {
   res.send("About this wiki");
 });
 
@@ -23,7 +23,6 @@ router.post("/about", function (req, res) {
 //     const id = req.params.id;
 // });
 
-router.route("/:id")
 router.route("/display-all-cars")
   .get((req, res) => {
     res.render("all-cars", {
@@ -72,6 +71,8 @@ router.route("/statistics")
   })
   .delete((req, res) => {
     res.send("delete statistics")
+  })
+
 router.route("/get-all-cars")
   .get((req, res) => {
     res.send({
