@@ -126,26 +126,33 @@ router.route("/statistics")
       if (err || !db) {
         return err
       }
-      for (let i = 0; i < req.body.length; i++) {
+
+      Object.entries(req.body).forEach(entry =>{
         db.db("piatnik_cars").collection("statistics").findOneAndUpdate({
-          carName: req.body[i].carName,
-        }, {
-          $inc: {
-            "statistics.won": parseInt(req.body[i].statistics.won),
-            "statistics.draw": parseInt(req.body[i].statistics.draw),
-            "statistics.lost": parseInt(req.body[i].statistics.lost)
-          }
-        }, {
-          upsert: true,
-        })
-      }
+            carName: entry[0],
+          }, {
+            $inc: {
+              "statistics.won": parseInt(entry.duelsWon),
+              "statistics.draw": parseInt(entry.duelsTie),
+              "statistics.lost": parseInt(entry.duelsLost)
+            }
+          }, {
+            upsert: true,
+          })
+      })
     });
     res.json({
       message: "put statistics"
     })
   })
   .delete((req, res) => {
-    res.send("delete statistics")
+    client.connect(function(err, db) {
+      if (err || !db) {
+        return err
+      }
+      db.db("piatnik_cars").collection("statistics").drop()
+      res.send("delete statistics")
+    })
   })
 
 router.get("/statistics/:carName", (req, res) => {
