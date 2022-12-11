@@ -127,18 +127,18 @@ router.route("/statistics")
         return err
       }
 
-      Object.entries(req.body).forEach(entry =>{
+      Object.entries(req.body).forEach(entry => {
         db.db("piatnik_cars").collection("statistics").findOneAndUpdate({
-            carName: entry[0],
-          }, {
-            $inc: {
-              "statistics.won": parseInt(entry.duelsWon),
-              "statistics.draw": parseInt(entry.duelsTie),
-              "statistics.lost": parseInt(entry.duelsLost)
-            }
-          }, {
-            upsert: true,
-          })
+          carName: entry[0],
+        }, {
+          $inc: {
+            "statistics.won": parseInt(entry[1].duelsWon),
+            "statistics.draw": parseInt(entry[1].duelsTie),
+            "statistics.lost": parseInt(entry[1].duelsLost)
+          }
+        }, {
+          upsert: true,
+        })
       })
     });
     res.json({
@@ -162,10 +162,10 @@ router.get("/statistics/:carName", (req, res) => {
     }
     db.db("piatnik_cars").collection("statistics").find({
       carName: req.params.carName,
-    }).toArray(function (err, result) {
+    }).toArray(function(err, result) {
       if (err) {
         res.status(400).send("Error fetching listings!");
-     } else {
+      } else {
         res.json({
           message: `Here we showing statistics for particular name : ${req.params.carName}`,
           value: result
