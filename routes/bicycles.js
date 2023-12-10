@@ -25,7 +25,41 @@ router.route('/').get((req, res)=>{
 				})
 			}
 		})
-	})		
+	})
+})
+
+router.route('/single-bicycle/:id').put((req, res) => {
+	client.connect(function(err, db) {
+		if(err || !db) {
+			return err;
+		}
+		const entry = db.db('test').collection('biciklete').findOne({
+			_id: req.body._id
+		}, function(err, doc){
+			if(err){
+				res.status(400).send("Error fetching listing.")
+			} else {
+				db.db('test').collection('biciklete').findOneAndUpdate({
+					_id: req.body._id
+				}, {
+					$set: {
+						in_working_order: req.body.newValue,
+					}
+				}, {
+					upsert: true,
+					returnNewDocument: true
+				}, function(err, updatedDoc) {
+					if(err) {
+						res.status(500).send("Error updating listing.")
+					}		else {
+						res.json({
+							message: `Looks like it has been updated, ${req.body._id} ${req.body.newValue}`
+						})
+					}
+				})
+			}
+		})
+	})
 })
 
 module.exports = router;
