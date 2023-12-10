@@ -28,7 +28,8 @@ router.route('/').get((req, res)=>{
 	})
 })
 
-router.route('/single-bicycle/:id').put((req, res) => {
+router.route('/single-bicycle/:id')
+.put((req, res) => {
 	client.connect(function(err, db) {
 		if(err || !db) {
 			return err;
