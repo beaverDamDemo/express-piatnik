@@ -182,6 +182,17 @@ router.route("/get-all-cars")
     })
   })
 
+  router.route("/dummy")
+    .get((req, res) => {
+      res.send({
+        dummyData: [{
+          foo: 'quux',
+          quux: 'foo',
+          stevilkica: 10000000000
+        }]
+      })
+    })
+
 router.route("/get-single-car/:id")
   .get((req, res) => {
     res.send({
